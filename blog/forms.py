@@ -7,6 +7,13 @@ class PostForm(forms.ModelForm):
     model = Post
     fields = ['title', 'text']
 
+  def save(self, user):
+    obj = super().save(commit=False)
+    obj.author = user
+    obj.save()
+    return obj
+
+
 class CommentForm(forms.ModelForm):
   
   class Meta:
